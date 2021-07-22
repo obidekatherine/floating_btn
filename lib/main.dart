@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +21,20 @@ class ButtonPage extends StatefulWidget {
 }
 
 class _ButtonPageState extends State<ButtonPage> {
-  int count = 0;
+  int _count = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _count++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _count--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,48 +55,32 @@ class _ButtonPageState extends State<ButtonPage> {
             ),
             SizedBox(height: 10),
             Text(
-              count.toString(),
+              _count.toString(),
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
-              height: 200,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                FloatingActionButton(
-                  child: Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      count++;
-                    });
-                  },
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                FloatingActionButton(
-                  child: Icon(
-                    Icons.remove,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      count--;
-                    });
-                  },
-                ),
-              ],
-            ),
           ],
         ),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: Icon(Icons.add),
+          ),
+          SizedBox(width: 10),
+          FloatingActionButton(
+            onPressed: _decrementCounter,
+            tooltip: 'Decrement',
+            child: Icon(Icons.remove),
+          ),
+        ],
       ),
     );
   }
 }
+
